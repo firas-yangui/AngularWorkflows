@@ -1,10 +1,10 @@
 var gulp = require('gulp'),
-		gulpConcat = require('gulp-concat'),
-		uglify = require('gulp-uglify');
+		$ = require('gulp-load-plugins')();
 
 gulp.task('default', function() {
 	gulp.src('js/**/*.js')
-		.pipe(gulpConcat('bundle.js'))
-		.pipe(uglify())
+		.pipe($.ngAnnotate())
+		.pipe($.concat('bundle.js'))
+		.pipe($.uglify())
 		.pipe(gulp.dest('bin/js'));
 });
