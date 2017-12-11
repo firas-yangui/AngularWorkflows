@@ -1,8 +1,10 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+		gulpConcat = require('gulp-concat'),
+		uglify = require('gulp-uglify');
 
-
-
-gulp.task('default', function(){
-	console.log('We are ready to go!');
-
-})
+gulp.task('default', function() {
+	gulp.src('js/**/*.js')
+		.pipe(gulpConcat('bundle.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('bin/js'));
+});
