@@ -3,6 +3,9 @@ var gulp = require('gulp'),
 
 gulp.task('default', function() {
 	gulp.src('js/**/*.js')
+		.pipe($.babel({
+			presets: ['es2015']
+		 }))
 		.pipe($.ngAnnotate())
 		.pipe($.sourcemaps.init())
 		.pipe($.concat('bundle.js'))
