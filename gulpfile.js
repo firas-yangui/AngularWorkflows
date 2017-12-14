@@ -32,12 +32,16 @@ gulp.task('default', ['test'], function() {
 
 gulp.task('test', ['scripts'], function(done) {
 
+	var preprocessors = {};
+	preprocessors[bundle] = ['coverage'];
+
 	var files = [specs, bundle];
 	files = karmaFiles.concat(files);
 
 	new karma.Server({
 		configFile: __dirname + '/karma.conf.js',
 		files: files,
+		preprocessors: preprocessors,
 		singleRun: true
 	}, function() {
 		done();
