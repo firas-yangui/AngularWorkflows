@@ -1,7 +1,10 @@
 var gulp = require('gulp'),
 		$ = require('gulp-load-plugins')(),
 		//stylish = require('jshint-stylish'),
-		karma = require('karma');
+		karma = require('karma'),
+		args = require('yargs').argv;
+
+var prod = args.prod;
 
 var scripts = ['js/**/*.js','!js/spec/*.js'];
 var karmaFiles = ['node_modules/angular/angular.js',
@@ -19,10 +22,10 @@ gulp.task('scripts', function() {
 			presets: ['es2015']
 		 }))
 		.pipe($.ngAnnotate())
-		.pipe($.sourcemaps.init())
+		.pipe(!prod ? $.sourcemaps.init() : $.util.noop())
 		.pipe($.concat('bundle.js'))
 		.pipe($.uglify())
-		.pipe($.sourcemaps.write())
+		.pipe(!prod ? $.sourcemaps.write() : $.util.noop())
 		.pipe(gulp.dest('bin/js'));
 });
 
